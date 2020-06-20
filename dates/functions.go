@@ -148,3 +148,37 @@ func MonthSpanishName(number string) (spanishName string, err error) {
 	}
 	return
 }
+
+// *GetLastDayNextMonth devuelve una fecha con formato ISO 8601 con el último día del siguiente mes.
+func GetLastDayNextMonth(dateISO8601 string) (newDate string, err error) {
+	_ = time.Now()
+	dateString := dateISO8601[:8] + "01"
+	date, err := time.Parse("2006-01-02", dateString)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	date = date.AddDate(0, 2, -1)
+
+	newDate = date.String()
+	newDate = newDate[:10]
+	return
+}
+
+// *AddDate emula el comportamiento de la función de la biblioteca estándar con el mismo nombre, con la diferencia que
+// * dates.AddDate trabaja con strings. Es necesario que el string de la fecha tenga formato ISO 8601
+func AddDate(dateISO8601 string, years int, months int, days int) (newDate string, err error) {
+	_ = time.Now()
+	date, err := time.Parse("2006-01-02", dateISO8601)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	date = date.AddDate(years, months, days)
+
+	newDate = date.String()
+	newDate = newDate[:10]
+	return
+}
