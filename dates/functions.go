@@ -9,7 +9,6 @@ import (
 // *CompareDates permite obtener la fecha más antigua, la más lejana o la más próxima en el futuro de un conjunto de
 // * fechas. Las fechas deben estar contenidas en un slice de strings y el parámetro operation recibe tres valores
 // * válidos: «minor», «major» y «next».
-
 func CompareDates(operation string, slice []string) (dateResult string, err error) {
 
 	if operation == "minor" || operation == "major" {
@@ -149,7 +148,7 @@ func MonthSpanishName(number string) (spanishName string, err error) {
 	return
 }
 
-// *GetLastDayNextMonth devuelve una fecha con formato ISO 8601 con el último día del siguiente mes.
+// GetLastDayNextMonth devuelve una fecha con formato ISO 8601 con el último día del siguiente mes.
 func GetLastDayNextMonth(dateISO8601 string) (newDate string, err error) {
 	_ = time.Now()
 	dateString := dateISO8601[:8] + "01"
@@ -166,8 +165,8 @@ func GetLastDayNextMonth(dateISO8601 string) (newDate string, err error) {
 	return
 }
 
-// *AddDate emula el comportamiento de la función de la biblioteca estándar con el mismo nombre, con la diferencia que
-// * dates.AddDate trabaja con strings. Es necesario que el string de la fecha tenga formato ISO 8601
+// AddDate emula el comportamiento de la función de la biblioteca estándar con el mismo nombre, con la diferencia que
+// dates.AddDate trabaja con strings. Es necesario que el string de la fecha tenga formato ISO 8601
 func AddDate(dateISO8601 string, years int, months int, days int) (newDate string, err error) {
 	_ = time.Now()
 	date, err := time.Parse("2006-01-02", dateISO8601)
