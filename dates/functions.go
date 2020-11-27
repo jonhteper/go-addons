@@ -6,9 +6,24 @@ import (
 	"time"
 )
 
-// *CompareDates permite obtener la fecha más antigua, la más lejana o la más próxima en el futuro de un conjunto de
-// * fechas. Las fechas deben estar contenidas en un slice de strings y el parámetro operation recibe tres valores
-// * válidos: «minor», «major» y «next».
+// Obtiene la fecha ─convertida a string─ con layout YYY-MM-DD (ISO 8601).
+func Today() string {
+	t := time.Now()
+	date, _ := time.Parse("2006-01-02", t.String()[:10])
+
+	return date.String()[:10]
+}
+
+// Obtiene la fecha en formato latino (DD/MM/YYYY). Con el parámetro
+// letters se alterna a un layout semejante a "16 de junio de 2020".
+func LatinToday(letters bool) string {
+	today, _ := LatinDate(Today(), letters)
+	return today
+}
+
+// CompareDates permite obtener la fecha más antigua, la más lejana o la más próxima en el futuro de un conjunto de
+// fechas. Las fechas deben estar contenidas en un slice de strings y el parámetro operation recibe tres valores
+// válidos: «minor», «major» y «next».
 func CompareDates(operation string, slice []string) (dateResult string, err error) {
 
 	if operation == "minor" || operation == "major" {
@@ -33,8 +48,8 @@ func CompareDates(operation string, slice []string) (dateResult string, err erro
 	return
 }
 
-// * EvaluateDates devuelve la fecha más antigua o la más lejana de un grupo de fechas contenidas en un slice de
-// *  strings.
+// EvaluateDates devuelve la fecha más antigua o la más lejana de un grupo de fechas contenidas en un slice de
+// strings.
 func EvaluateDates(operation string, slice []string) (result string, err error) {
 	_ = time.Now
 	for i := 0; i <= len(slice)-1; i++ {
@@ -97,23 +112,22 @@ func GetNextDate(slice []string) (result string, err error) {
 	return
 }
 
-// *LatinDate convierte una fecha de formato ISO 8601 (AAAA-MM-DD) al formato DD/MM/AAAA. Con el parámetro
-// * 'preferablyLetters' se alterna a un layout semejante a "16 de junio de 2020".
+// LatinDate convierte una fecha de formato ISO 8601 (YYYY-MM-DD) al formato DD/MM/YYYY. Con el parámetro
+// 'preferablyLetters' se alterna a un layout semejante a "16 de junio de 2020".
 func LatinDate(dateISO8601 string, preferablyLetters bool) (dateResult string, err error) {
 	year := dateISO8601[:4]
 	month := dateISO8601[5:7]
 	day := dateISO8601[8:]
-	month, err = MonthSpanishName(string(month))
+	month, err = MonthSpanishName(month)
 	if err != nil {
 		return
 	}
 
 	if preferablyLetters {
-		dateResult = day + " de " + month + " de " + year
-		return
+		return fmt.Sprintf("%v de %v de %v", day, month, year), nil
 	}
-	dateResult = day + "/" + month + "/" + year
-	return
+
+	return fmt.Sprintf("%v/%v/%v", day, month, year), nil
 }
 
 // MonthSpanishName devuelve el nombre del mes —en español— correspondiente al número del mismo mes.
