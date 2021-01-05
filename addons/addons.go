@@ -37,15 +37,9 @@ func ReadJSONFile(name string, v interface{}) (content string, err error) {
 	return
 }
 
-// Ejecuta una serie de comandos CLI según el sistema operativo.
-func Command(c ...string) error {
-	args := c[1:]
-	cmd := exec.Command(c[0], args...)
-	if IsWindows() {
-
-		cmd = exec.Command("cmd", c...)
-	}
+// Ejecuta una serie de comandos CLI.
+func Command(name string, arg ...string) error {
+	cmd := exec.Command(name, arg...)
 	cmd.Stdout = os.Stdout
-
 	return cmd.Run()
 }
