@@ -3,6 +3,7 @@ package addons
 
 import (
 	"encoding/json"
+	"golang.org/x/crypto/bcrypt"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -42,4 +43,9 @@ func Command(name string, arg ...string) error {
 	cmd := exec.Command(name, arg...)
 	cmd.Stdout = os.Stdout
 	return cmd.Run()
+}
+
+// ComparePasswordHash verifica los una contraseña en string y un hash en string, devuelve un error si estos no coinciden.
+func ComparePasswordHash(password string, hash string) error {
+	return bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 }
