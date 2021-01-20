@@ -21,3 +21,12 @@ func AllMethods(w *http.ResponseWriter) {
 func ApplicationJson(w *http.ResponseWriter) {
 	(*w).Header().Set("Content-Type", "application/json; charset=utf-8")
 }
+
+// Route es un objeto que contiene los datos para crear una ruta en una API REST, puede utilizarse en conjunto
+// con el objeto Router de github.com/gorilla/mux.
+type Route struct {
+	Name       string
+	Methods    []string
+	Pattern    string
+	HandleFunc http.HandlerFunc
+}
