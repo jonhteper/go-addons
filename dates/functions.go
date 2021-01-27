@@ -6,10 +6,12 @@ import (
 	"time"
 )
 
-// Obtiene la fecha ─convertida a string─ con layout YYY-MM-DD (ISO 8601).
+const USLayout = "2006-01-02"
+
+// Obtiene la fecha ─convertida a string─ con layout YYYY-MM-DD (ISO 8601).
 func Today() string {
 	t := time.Now()
-	date, _ := time.Parse("2006-01-02", t.String()[:10])
+	date, _ := time.Parse(USLayout, t.String()[:10])
 
 	return date.String()[:10]
 }
@@ -56,12 +58,12 @@ func EvaluateDates(operation string, slice []string) (result string, err error) 
 		for e := 0; e <= len(slice)-1; e++ {
 			if slice[i] != slice[e] {
 				if slice[i] != "" && slice[e] != "" {
-					dateI, err := time.Parse("2006-01-02", slice[i])
+					dateI, err := time.Parse(USLayout, slice[i])
 					if err != nil {
 						fmt.Println(err)
 						return "", err
 					}
-					dateE, err := time.Parse("2006-01-02", slice[e])
+					dateE, err := time.Parse(USLayout, slice[e])
 					if err != nil {
 						fmt.Println(err)
 						return "", err
@@ -94,7 +96,7 @@ func GetNextDate(slice []string) (result string, err error) {
 	today := time.Now()
 	for i := 0; i <= len(slice)-1; i++ {
 		if slice[i] != "" {
-			nextDate, err := time.Parse("2006-01-02", slice[i])
+			nextDate, err := time.Parse(USLayout, slice[i])
 			if err != nil {
 				fmt.Println(err)
 				return "", err
@@ -166,7 +168,7 @@ func MonthSpanishName(number string) (spanishName string, err error) {
 func GetLastDayNextMonth(dateISO8601 string) (newDate string, err error) {
 	_ = time.Now()
 	dateString := dateISO8601[:8] + "01"
-	date, err := time.Parse("2006-01-02", dateString)
+	date, err := time.Parse(USLayout, dateString)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -183,7 +185,7 @@ func GetLastDayNextMonth(dateISO8601 string) (newDate string, err error) {
 // dates.AddDate trabaja con strings. Es necesario que el string de la fecha tenga formato ISO 8601
 func AddDate(dateISO8601 string, years int, months int, days int) (newDate string, err error) {
 	_ = time.Now()
-	date, err := time.Parse("2006-01-02", dateISO8601)
+	date, err := time.Parse(USLayout, dateISO8601)
 	if err != nil {
 		fmt.Println(err)
 		return
