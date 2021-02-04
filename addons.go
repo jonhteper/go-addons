@@ -15,6 +15,10 @@ func IsWindows() bool {
 	return runtime.GOOS == "windows"
 }
 
+func IsOSX() bool {
+	return runtime.GOOS == "darwin"
+}
+
 // Indica si se está trabajando sobre Linux
 func IsLinux() bool {
 	return runtime.GOOS == "linux"

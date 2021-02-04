@@ -1,25 +1,10 @@
-package core
+package addons
 
 import (
 	"bytes"
 	"crypto/tls"
 	"net/http"
 )
-
-// WARNING: Esta función permite conectarse a dominios con certificado autofirmado.
-// Utilizar solo en dominios de confianza.
-//
-// SimplePostRequest realiza una request con el método POST con autorización
-//tipo Bearer token.
-//
-// El parámetro `body` debe ser escrito con "formato JSON", por ejemplo:
-//
-// response, err := SimplePostRequest("https://example.com", "my.awesome.Token", `{"param":"value"}`)
-//
-func SimplePostRequest(url, token, body string) (*http.Response, error) {
-	return request(http.MethodPost, url, token, []byte(body))
-}
-
 
 // WARNING: Esta función permite conectarse a dominios con certificado autofirmado.
 // Utilizar solo en dominios de confianza.
@@ -35,7 +20,7 @@ func SimplePostRequest(url, token, body string) (*http.Response, error) {
 //
 //  response, err := PostRequest("https://example.com", "my.awesome.Token", data)
 //
-func PostRequest(url, token string, body []byte) (*http.Response, error){
+func PostRequest(url, token string, body []byte) (*http.Response, error) {
 	return request(http.MethodPost, url, token, body)
 }
 
@@ -53,7 +38,7 @@ func PostRequest(url, token string, body []byte) (*http.Response, error){
 //
 //  response, err := PutRequest("https://example.com", "my.awesome.Token", data)
 //
-func PutRequest(url, token string, body []byte) (*http.Response, error){
+func PutRequest(url, token string, body []byte) (*http.Response, error) {
 	return request(http.MethodPut, url, token, body)
 }
 
@@ -74,7 +59,6 @@ func PutRequest(url, token string, body []byte) (*http.Response, error){
 func DeleteRequest(url, token string, body []byte) (*http.Response, error) {
 	return request(http.MethodDelete, url, token, body)
 }
-
 
 func request(method, url, token string, body []byte) (*http.Response, error) {
 	req, err := http.NewRequest(method, url, bytes.NewReader(body))

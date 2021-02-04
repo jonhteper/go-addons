@@ -1,7 +1,7 @@
-package core
+package addons
 
-// SafeAppend permite insertar un string a slice tras comprobar si existe una entrada similar.
-func SafeAppend(slice []string, addon string) []string {
+// StringAppend permite insertar un string a slice tras comprobar si existe una entrada similar.
+func StringAppend(slice []string, addon string) []string {
 	var verify bool
 	for i := 0; i <= len(slice)-1; i++ {
 

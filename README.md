@@ -1,6 +1,5 @@
 # go-addons
-Funciones relativamente útiles para golang
-## Descripción:
-* Este es un proyecto personal, no es más que una pequeña librería para facilitar el trabajo del día a día.
-* Está abierto para cualquiera que quiera utilizarlo.
-* Solo soporte en español.
+Additional golang functions, it's like a toolbox and not have a  strict 
+order. Not for production projects, if you want import some function, 
+copy the code and paste in your project; this package not have any type 
+support.
